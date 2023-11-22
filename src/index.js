@@ -13,13 +13,13 @@ const clickAddTodoButton = () => {
         //リストのitemになる要素を作成
             const todotext = addtodo(inputText)
     
-        //console.log(listItem)
+        //console.log(listItem) //コンソールログで変数の確認する。（f12で検証する）
         //ulタグの子要素にliタグを入れる
         document.getElementById("todo-list").appendChild(todotext)//getelementの子要素
         //空白もリストに入ってしまうので・・・ifでtruthy,falsy
-    }else{
-        alert("todoを追加してください")//条件外の場合（falsyじゃないortruthyでない）
-    }//↑入力フィールドを空にする
+    }else{ //条件外の場合（falsyじゃないor truthyでない）
+        alert("todoを追加してください")
+    }//↑ここまで入力フィールドを空にするコマンド&未入力の場合のアラートコマンド
 
 }
 
@@ -30,13 +30,16 @@ const addtodo =(text) =>{//
 
         //削除用のボタンを作成
         const deleteButton = createDeleteButton(listItem)
-
         listItem.appendChild(deleteButton)
 
-    return listItem//listitemをリターンする
+        const CompleteButton = createCompleteButton(listItem)
+        listItem.appendChild(CompleteButton)
+
+    return listItem//listitemをリターン
 
 }
 
+//削除ボタンを作成
 const createDeleteButton = (target) =>{
     //ボタンを作成
     const deleteButton = document.createElement("button")
@@ -45,8 +48,30 @@ const createDeleteButton = (target) =>{
     deleteButton.addEventListener("click",() =>{
             target.remove()
     })
+
     return deleteButton
 }
+//完了ボタンを作成
+const createCompleteButton = (target) =>{
+    const CompleteButton = document.createElement("button")
+    CompleteButton.textContent ="完了"
+    CompleteButton.id = "complete-button"
+    CompleteButton.addEventListener("click",() =>{
+            ActionComplete(target) 
+    })
+
+    return CompleteButton
+    
+}
+
+const ActionComplete = (target)=>{
+    target.querySelector("#delete-button").remove() //クエリ⇨（）内の要素を対象とする
+    target.querySelector("#complete-button").remove() 　//クエリセレクタはいろんなものを対象と出来るので。。idを取る時は＃が必要
+    target.remove()
+    document.getElementById("complete-list").appendChild(target) //document(全体から)getelement~の最初に出てきたやつを対象にする
+}
+
+
 //test
 //完了ボタン作成。doneに移行※削除と完了への追加
 //もどすボタン作成。todoに移行
