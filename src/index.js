@@ -58,6 +58,7 @@ const createCompleteButton = (target) =>{
     CompleteButton.id = "complete-button"
     CompleteButton.addEventListener("click",() =>{
             ActionComplete(target) 
+
     })
 
     return CompleteButton
@@ -65,15 +66,42 @@ const createCompleteButton = (target) =>{
 }
 
 const ActionComplete = (target)=>{
-    target.querySelector("#delete-button").remove() //クエリ⇨（）内の要素を対象とする
-    target.querySelector("#complete-button").remove() 　//クエリセレクタはいろんなものを対象と出来るので。。idを取る時は＃が必要
+    target.querySelector("#delete-button").remove()  //クエリ⇨（）内の要素を対象とする
+    target.querySelector("#complete-button").remove()  //クエリセレクタはいろんなものを対象と出来る.idを取る時は＃が必要
     target.remove()
     document.getElementById("complete-list").appendChild(target) //document(全体から)getelement~の最初に出てきたやつを対象にする
+    const ReturnButton = createReturnButton(target)
+    target.appendChild(ReturnButton)
+    
+    return target
+
 }
 
+//戻すボタンを作成
+const createReturnButton = (back) =>{
+    const ReturnButton = document.createElement("button")
+    ReturnButton.textContent ="戻す"
+    ReturnButton.id = "Return-button"
+    ReturnButton.addEventListener("click",() =>{
+            ActionReturn(back) 
+    })
+    
+    return ReturnButton
+}
 
-//test
-//完了ボタン作成。doneに移行※削除と完了への追加
-//もどすボタン作成。todoに移行
-//編集ボタン。保存。
-//test2
+//戻す⇨todoに回帰。削除・完了ボタンも戻す。。。もっといい書き方あるんだろうな。。
+const ActionReturn = (back)=>{
+    back.querySelector("#Return-button").remove() 
+    back.remove()
+    document.getElementById("todo-list").appendChild(back)
+    const deleteButton = createDeleteButton(back)
+    back.appendChild(deleteButton)
+
+    const CompleteButton = createCompleteButton(back)
+    back.appendChild(CompleteButton)
+
+    return back
+
+    //console.log(back)
+
+}
