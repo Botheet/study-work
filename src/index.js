@@ -3,6 +3,15 @@ const button = document.getElementById("add-todo").addEventListener("click", ()=
     //alert("todoを追加してください")
 })
 
+const enterKey = document.getElementById("input-todo").addEventListener('keydown' ,(event) =>{
+    if(event.key === 'Enter'){
+        event.preventDefault()
+        //console.log('Enter key pressed!')
+        clickAddTodoButton()}
+})
+
+
+
 const clickAddTodoButton = () => {
     //入力されたテキストを取得
     const inputText = document . getElementById("input-todo").value.trim()//trimは空白を削除する
@@ -10,12 +19,11 @@ const clickAddTodoButton = () => {
 
     if(inputText){//文字が入力された場合 truthyの意味※！を頭につけると逆転
         document.getElementById("input-todo").value = ""//入力してボタンを押すと入力した文字が消えるコマンド
-        //リストのitemになる要素を作成
-            const todotext = addtodo(inputText)
-    
+
+        const todoText = addTodo(inputText) //リストのitemになる要素を作成
         //console.log(listItem) //コンソールログで変数の確認する。（f12で検証する）
         //ulタグの子要素にliタグを入れる
-        document.getElementById("todo-list").appendChild(todotext)//getelementの子要素
+        document.getElementById("todo-list").appendChild(todoText)//getelementの子要素
         //空白もリストに入ってしまうので・・・ifでtruthy,falsy
     }else{ //条件外の場合（falsyじゃないor truthyでない）
         alert("todoを追加してください")
@@ -23,7 +31,8 @@ const clickAddTodoButton = () => {
 
 }
 
-const addtodo =(text) =>{//
+
+const addTodo =(text) =>{//
     const listItem = document.createElement("li")
     listItem.innerText = text//inputText//liタグのテキストに文字を挿入。listitemのインナーテキストの要素が入る
         //console.log(listItem)
@@ -32,16 +41,16 @@ const addtodo =(text) =>{//
         const deleteButton = createDeleteButton(listItem)
         listItem.appendChild(deleteButton)
 
-        const CompleteButton = createCompleteButton(listItem)
-        listItem.appendChild(CompleteButton)
+        const completeButton = createCompleteButton(listItem)
+        listItem.appendChild(completeButton)
+
 
     return listItem//listitemをリターン
 
 }
 
 //削除ボタンを作成
-const createDeleteButton = (target) =>{
-    //ボタンを作成
+const createDeleteButton = (target) =>{//ボタンを作成
     const deleteButton = document.createElement("button")
     deleteButton.textContent ="削除"
     deleteButton.id="delete-button"
@@ -52,28 +61,28 @@ const createDeleteButton = (target) =>{
     return deleteButton
 }
 //完了ボタンを作成
-const createCompleteButton = (target) =>{
-    const CompleteButton = document.createElement("button")
-    CompleteButton.textContent ="完了"
-    CompleteButton.id = "complete-button"
-    CompleteButton.addEventListener("click",() =>{
-            ActionComplete(target) 
+const createCompleteButton= (targetCompleteToDo) =>{
+    const completeButton = document.createElement("button")
+    completeButton.textContent ="完了"
+    completeButton.id = "complete-button"
+    completeButton.addEventListener("click",() =>{
+            ActionComplete(targetCompleteToDo) 
 
     })
 
-    return CompleteButton
-    
+    return completeButton
+
 }
 
-const ActionComplete = (target)=>{
-    target.querySelector("#delete-button").remove()  //クエリ⇨（）内の要素を対象とする
-    target.querySelector("#complete-button").remove()  //クエリセレクタはいろんなものを対象と出来る.idを取る時は＃が必要
-    target.remove()
-    document.getElementById("complete-list").appendChild(target) //document(全体から)getelement~の最初に出てきたやつを対象にする
-    const ReturnButton = createReturnButton(target)
-    target.appendChild(ReturnButton)
+const ActionComplete = (targetCompleteToDo)=>{
+    targetCompleteToDo.querySelector("#delete-button").remove()  //クエリ⇨（）内の要素を対象とする
+    targetCompleteToDo.querySelector("#complete-button").remove()  //クエリセレクタはいろんなものを対象と出来る.idを取る時は＃が必要
+    targetCompleteToDo.remove()
+    document.getElementById("complete-list").appendChild(targetCompleteToDo) //document(全体から)getelement~の最初に出てきたやつを対象にする
+    const ReturnButton = createReturnButton(targetCompleteToDo)
+    targetCompleteToDo.appendChild(ReturnButton)
     
-    return target
+    return targetCompleteToDo
 
 }
 
@@ -97,8 +106,9 @@ const ActionReturn = (back)=>{
     const deleteButton = createDeleteButton(back)
     back.appendChild(deleteButton)
 
-    const CompleteButton = createCompleteButton(back)
-    back.appendChild(CompleteButton)
+    const completeButton = createCompleteButton(
+back)
+    back.appendChild(completeButton)
 
     return back
 
