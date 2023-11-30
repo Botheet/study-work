@@ -44,8 +44,6 @@ const addTodo =(text) =>{//
         const deleteButton = createDeleteButton(listItem)
         listItem.appendChild(deleteButton)
 
-
-
     return listItem//listitemをリターン
 
 }
