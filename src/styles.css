@@ -1,15 +1,22 @@
 body{
-    background-color:whitesmoke
+    background-color:rgb(173, 193, 231)
 }
 
 h1{
-    color: rgb(95, 94, 94);
-    font-weight: bold;
-    font-size: x-large;
-    background-color: gainsboro;
+    color: white;
+    -webkit-text-stroke: 1.5px black;
+    stroke: 2px black;
+    font-size: 28px;
+
 }
-
-
+#add-todo{
+    font-weight: bold;
+    color:navy;
+    background-color:whitesmoke;
+}
+.input-todo{
+    color:rgb(145, 27, 27);
+}
 h2{
     background-color: black;
     color: white;
