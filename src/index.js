@@ -36,13 +36,14 @@ const addTodo =(text) =>{//
     const listItem = document.createElement("li")
     listItem.innerText = text//inputText//liタグのテキストに文字を挿入。listitemのインナーテキストの要素が入る
         //console.log(listItem)
+        //完了ボタンの作成
+        const completeButton = createCompleteButton(listItem)
+        listItem.appendChild(completeButton)
 
         //削除用のボタンを作成
         const deleteButton = createDeleteButton(listItem)
         listItem.appendChild(deleteButton)
 
-        const completeButton = createCompleteButton(listItem)
-        listItem.appendChild(completeButton)
 
 
     return listItem//listitemをリターン
@@ -103,12 +104,13 @@ const ActionReturn = (back)=>{
     back.querySelector("#Return-button").remove() 
     back.remove()
     document.getElementById("todo-list").appendChild(back)
+
+    const completeButton = createCompleteButton(back)
+    back.appendChild(completeButton)
+
     const deleteButton = createDeleteButton(back)
     back.appendChild(deleteButton)
 
-    const completeButton = createCompleteButton(
-back)
-    back.appendChild(completeButton)
 
     return back
 

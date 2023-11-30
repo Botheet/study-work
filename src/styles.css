@@ -1,6 +1,23 @@
-h1{
-    color: lime;
+body{
+    background-color:whitesmoke
 }
+
 h1{
-    font-size: xx-large;
+    color: rgb(95, 94, 94);
+    font-weight: bold;
+    font-size: x-large;
+    background-color: gainsboro;
+}
+
+
+h2{
+    background-color: black;
+    color: white;
+}
+
+.title{
+    padding-left:0.5em;
+}
+#complete-list{
+    text-decoration-line: line-through;
 }
