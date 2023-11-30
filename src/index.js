@@ -2,15 +2,15 @@ const button = document.getElementById("add-todo").addEventListener("click", ()=
     clickAddTodoButton()//関数を入れるのにかっこが必要
     //alert("todoを追加してください")
 })
-
+//enterで入力
 const enterKey = document.getElementById("input-todo").addEventListener('keydown' ,(event) =>{
     if(event.key === 'Enter'){
-        event.preventDefault()
         //console.log('Enter key pressed!')
-        clickAddTodoButton()}
+        if(!event.isComposing){//文字の入力中、変換のenterを無視する
+            clickAddTodoButton()
+        }
+    }
 })
-
-
 
 const clickAddTodoButton = () => {
     //入力されたテキストを取得

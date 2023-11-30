@@ -1,5 +1,5 @@
 body{
-    background-color:rgb(173, 193, 231)
+    background-color:rgb(173, 193, 231);
 }
 
 h1{
@@ -7,16 +7,18 @@ h1{
     -webkit-text-stroke: 1.5px black;
     stroke: 2px black;
     font-size: 28px;
-
 }
+
 #add-todo{
     font-weight: bold;
     color:navy;
     background-color:whitesmoke;
 }
+
 .input-todo{
     color:rgb(145, 27, 27);
 }
+
 h2{
     background-color: black;
     color: white;
@@ -25,6 +27,7 @@ h2{
 .title{
     padding-left:0.5em;
 }
+
 #complete-list{
     text-decoration-line: line-through;
 }
